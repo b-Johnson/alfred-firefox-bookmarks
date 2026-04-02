@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>net.xnet.alfred-firefox-bookmarks</string>
+	<key>connections</key>
+	<dict>
+		<key>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B2C3D4E5-F6A7-8901-BCDE-F12345678901</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C3D4E5F6-A7B8-9012-CDEF-123456789012</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D4E5F6A7-B8C9-0123-DEF0-234567890123</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E5F6A7B8-C9D0-1234-EF01-345678901234</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F6A7B8C9-D0E1-2345-F012-456789012345</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>07B8C9D0-E1F2-3456-0123-567890123456</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>18C9D0E1-F203-4567-1234-678901234567</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>29D0E1F2-0314-5678-2345-789012345678</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E5F6A7B8-C9D0-1234-EF01-345678901234</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Brian Johnson</string>
+	<key>description</key>
+	<string>Search and open Firefox bookmarks</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Firefox Bookmarks</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>bm</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading bookmarks…</string>
+				<key>script</key>
+				<string>python3 bookmarks.py search "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Search and open your Firefox bookmarks</string>
+				<key>title</key>
+				<string>Firefox Bookmarks</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>29D0E1F2-0314-5678-2345-789012345678</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>.
+query='{query}'
+variables={allvars}</string>
+				<key>cleardebuggertext</key>
+				<false/>
+				<key>processoutputs</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.debug</string>
+			<key>uid</key>
+			<string>E5F6A7B8-C9D0-1234-EF01-345678901234</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>python3 bookmarks.py open $appkey "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>5</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F6A7B8C9-D0E1-2345-F012-456789012345</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>bmsettings</string>
+				<key>subtext</key>
+				<string>Configure Firefox profile path and apps to open bookmarks in</string>
+				<key>text</key>
+				<string>Edit Bookmark Settings</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>07B8C9D0-E1F2-3456-0123-567890123456</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>python3 bookmarks.py settings</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>18C9D0E1-F203-4567-1234-678901234567</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>bmhelp</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Open Firefox Bookmarks Help</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>open README.html</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>B2C3D4E5-F6A7-8901-BCDE-F12345678901</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>bmupdate</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Refresh Firefox Bookmark Cache</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C3D4E5F6-A7B8-9012-CDEF-123456789012</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>python3 bookmarks.py update</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>D4E5F6A7-B8C9-0123-DEF0-234567890123</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Search and open your Firefox bookmarks from Alfred.
+
+Usage
+-----
+
+- `bm [query]` — Show bookmarks filtered by query
+  + `↩` — Open in app_default
+  + `⌘+↩` — Open in app_cmd
+  + `⌥+↩` — Open in app_alt
+  + `^+↩` — Open in app_ctrl
+  + `⇧+↩` — Open in app_shift
+  + `fn+↩` — Open in app_fn
+- `bmsettings` — Edit settings.json (configure Firefox profile path and apps)
+- `bmupdate` — Force a refresh of the bookmark cache
+- `bmhelp` — Open the help file in your browser
+
+Configuration
+-------------
+
+Run `bmsettings` to open settings.json.
+
+  firefox_profile  — Path to your Firefox profile directory (null = auto-detect)
+  app_default      — App opened with ↩ (e.g. "Firefox", "Safari", "Browser")
+  app_cmd          — App opened with ⌘+↩
+  app_alt          — App opened with ⌥+↩
+  app_ctrl         — App opened with ^+↩
+  app_shift        — App opened with ⇧+↩
+  app_fn           — App opened with fn+↩
+
+Use "Browser" as the app name to open in the system default browser.
+Any app_* value may be a list to open in multiple apps simultaneously.</string>
+	<key>uidata</key>
+	<dict>
+		<key>29D0E1F2-0314-5678-2345-789012345678</key>
+		<dict>
+			<key>note</key>
+			<string>Search / filter bookmarks</string>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
+		<key>E5F6A7B8-C9D0-1234-EF01-345678901234</key>
+		<dict>
+			<key>xpos</key>
+			<integer>210</integer>
+			<key>ypos</key>
+			<integer>60</integer>
+		</dict>
+		<key>F6A7B8C9-D0E1-2345-F012-456789012345</key>
+		<dict>
+			<key>note</key>
+			<string>Open bookmark URL in configured app</string>
+			<key>xpos</key>
+			<integer>380</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
+		<key>07B8C9D0-E1F2-3456-0123-567890123456</key>
+		<dict>
+			<key>note</key>
+			<string>Open settings in default editor</string>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>200</integer>
+		</dict>
+		<key>18C9D0E1-F203-4567-1234-678901234567</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>200</integer>
+		</dict>
+		<key>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</key>
+		<dict>
+			<key>note</key>
+			<string>Open help file in browser</string>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>370</integer>
+		</dict>
+		<key>B2C3D4E5-F6A7-8901-BCDE-F12345678901</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>370</integer>
+		</dict>
+		<key>C3D4E5F6-A7B8-9012-CDEF-123456789012</key>
+		<dict>
+			<key>note</key>
+			<string>Force bookmark cache refresh</string>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>540</integer>
+		</dict>
+		<key>D4E5F6A7-B8C9-0123-DEF0-234567890123</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>540</integer>
+		</dict>
+	</dict>
+	<key>variables</key>
+	<dict>
+		<key>UPDATE_EVERY_MINS</key>
+		<string>60</string>
+	</dict>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/b-Johnson/alfred-firefox-bookmarks</string>
+</dict>
+</plist>

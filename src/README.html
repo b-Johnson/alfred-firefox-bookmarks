@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alfred Firefox Bookmarks — Help</title>
+  <style>
+    :root {
+      --bg: #1a1a2e;
+      --surface: #16213e;
+      --accent: #e94560;
+      --accent2: #0f3460;
+      --text: #e0e0e0;
+      --muted: #888;
+      --code-bg: #0d0d1a;
+      --border: #2a2a4a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      padding: 40px 24px 80px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 20px;
+      margin-bottom: 36px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+
+    header p {
+      color: var(--muted);
+      margin-top: 6px;
+      font-size: 0.95rem;
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 36px 0 12px;
+    }
+
+    p { margin-bottom: 12px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th {
+      text-align: left;
+      background: var(--accent2);
+      color: #fff;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+    code {
+      font-family: 'SF Mono', 'Fira Code', 'Menlo', monospace;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.88em;
+      color: #f0c36d;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 18px 20px;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Code', 'Menlo', monospace;
+      font-size: 0.87em;
+      color: #c9d1d9;
+      margin-bottom: 20px;
+    }
+
+    kbd {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-bottom-width: 2px;
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-size: 0.85em;
+      font-family: inherit;
+      color: #ddd;
+    }
+
+    .note {
+      background: rgba(233, 69, 96, 0.1);
+      border-left: 3px solid var(--accent);
+      border-radius: 4px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 0.93rem;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Firefox Bookmarks</h1>
+  <p>An Alfred workflow to search and open your Firefox bookmarks instantly.</p>
+</header>
+
+<h2>Keywords</h2>
+<table>
+  <tr>
+    <th>Keyword</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>bm [query]</code></td>
+    <td>Search and filter your Firefox bookmarks</td>
+  </tr>
+  <tr>
+    <td><code>bmsettings</code></td>
+    <td>Open <code>settings.json</code> to configure the workflow</td>
+  </tr>
+  <tr>
+    <td><code>bmupdate</code></td>
+    <td>Force a refresh of the bookmark cache</td>
+  </tr>
+  <tr>
+    <td><code>bmhelp</code></td>
+    <td>Open this help file</td>
+  </tr>
+</table>
+
+<h2>Modifier Keys</h2>
+<p>When a bookmark is selected, press a modifier key to open it in a different app:</p>
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Setting</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><kbd>↩</kbd></td>
+    <td><code>app_default</code></td>
+    <td>Firefox</td>
+  </tr>
+  <tr>
+    <td><kbd>⌘</kbd> <kbd>↩</kbd></td>
+    <td><code>app_cmd</code></td>
+    <td>System default browser</td>
+  </tr>
+  <tr>
+    <td><kbd>⌥</kbd> <kbd>↩</kbd></td>
+    <td><code>app_alt</code></td>
+    <td><em>not set</em></td>
+  </tr>
+  <tr>
+    <td><kbd>^</kbd> <kbd>↩</kbd></td>
+    <td><code>app_ctrl</code></td>
+    <td><em>not set</em></td>
+  </tr>
+  <tr>
+    <td><kbd>⇧</kbd> <kbd>↩</kbd></td>
+    <td><code>app_shift</code></td>
+    <td><em>not set</em></td>
+  </tr>
+  <tr>
+    <td><kbd>fn</kbd> <kbd>↩</kbd></td>
+    <td><code>app_fn</code></td>
+    <td><em>not set</em></td>
+  </tr>
+</table>
+
+<h2>Multi-Key Modifier Combinations</h2>
+<p>
+  You can bind <strong>any combination</strong> of modifier keys by joining them with underscores
+  in the settings key. The key parts are mapped directly to Alfred's combined modifier syntax.
+</p>
+<pre>{
+  "app_shift_ctrl": "Google Chrome",
+  "app_cmd_alt":    "Safari",
+  "app_cmd_shift":  ["Firefox", "Google Chrome"]
+}</pre>
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Modifier Combo</th>
+  </tr>
+  <tr><td><code>app_cmd_alt</code></td><td><kbd>⌘</kbd> <kbd>⌥</kbd> <kbd>↩</kbd></td></tr>
+  <tr><td><code>app_cmd_ctrl</code></td><td><kbd>⌘</kbd> <kbd>^</kbd> <kbd>↩</kbd></td></tr>
+  <tr><td><code>app_cmd_shift</code></td><td><kbd>⌘</kbd> <kbd>⇧</kbd> <kbd>↩</kbd></td></tr>
+  <tr><td><code>app_shift_ctrl</code></td><td><kbd>⇧</kbd> <kbd>^</kbd> <kbd>↩</kbd></td></tr>
+  <tr><td><code>app_alt_ctrl</code></td><td><kbd>⌥</kbd> <kbd>^</kbd> <kbd>↩</kbd></td></tr>
+  <tr><td><code>app_cmd_alt_ctrl</code></td><td><kbd>⌘</kbd> <kbd>⌥</kbd> <kbd>^</kbd> <kbd>↩</kbd></td></tr>
+</table>
+<p>Any combination of <code>cmd</code>, <code>alt</code>, <code>ctrl</code>, <code>shift</code>, and <code>fn</code> is supported — just join them with underscores.</p>
+
+<h2>Configuration</h2>
+<p>Run <code>bmsettings</code> to open <code>settings.json</code> in your default editor. The full set of options:</p>
+
+<pre>{
+  "firefox_profile": null,
+  "app_default": "Firefox",
+  "app_cmd": "Browser",
+  "app_alt": null,
+  "app_ctrl": null,
+  "app_shift": null,
+  "app_fn": null
+}</pre>
+
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>firefox_profile</code></td>
+    <td>
+      Absolute path to your Firefox profile directory (e.g.
+      <code>~/Library/Application Support/Firefox/Profiles/abc123.default-release</code>).
+      Set to <code>null</code> to auto-detect the default-release profile.
+    </td>
+  </tr>
+  <tr>
+    <td><code>app_default</code></td>
+    <td>
+      App to open bookmarks in by default. Use <code>"Browser"</code> for the
+      system default browser, or an app name like <code>"Firefox"</code>,
+      <code>"Safari"</code>, <code>"Google Chrome"</code>, or <code>"Arc"</code>.
+    </td>
+  </tr>
+  <tr>
+    <td><code>app_cmd</code> … <code>app_fn</code></td>
+    <td>Apps for modifier keys. Same values as <code>app_default</code>.</td>
+  </tr>
+</table>
+
+<p>Any <code>app_*</code> value can be a JSON array to open in multiple apps at once:</p>
+<pre>"app_cmd": ["Firefox", "Safari"]</pre>
+
+<h2>How Bookmarks are Loaded</h2>
+<p>
+  Firefox stores bookmarks in an SQLite database called <code>places.sqlite</code>
+  inside your profile directory. Because Firefox locks this file while running,
+  the workflow copies it to a temporary location before reading.
+</p>
+<p>
+  The bookmark cache is refreshed automatically every
+  <strong>60 minutes</strong> (configurable via the <code>UPDATE_EVERY_MINS</code>
+  workflow variable in Alfred). Run <code>bmupdate</code> to force an immediate refresh.
+</p>
+
+<div class="note">
+  <strong>Tip:</strong> After editing <code>settings.json</code>, the cache will be
+  refreshed automatically on the next search.
+</div>
+
+<h2>Troubleshooting</h2>
+<table>
+  <tr>
+    <th>Problem</th>
+    <th>Solution</th>
+  </tr>
+  <tr>
+    <td>No bookmarks appear</td>
+    <td>Run <code>bmupdate</code> and wait a few seconds, then try again.</td>
+  </tr>
+  <tr>
+    <td>Wrong Firefox profile used</td>
+    <td>
+      Set <code>firefox_profile</code> in <code>settings.json</code> to the
+      full path of the correct profile.
+    </td>
+  </tr>
+  <tr>
+    <td>App not found when opening</td>
+    <td>
+      Make sure the app name in <code>settings.json</code> matches the exact
+      name of the application in your <em>/Applications</em> folder.
+    </td>
+  </tr>
+</table>
+
+<footer>
+  Alfred Firefox Bookmarks &mdash;
+  <a href="https://github.com/b-Johnson/alfred-firefox-bookmarks">GitHub</a>
+  &mdash; MIT Licence
+</footer>
+
+</body>
+</html>
