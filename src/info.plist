@@ -6,6 +6,19 @@
 	<string>net.xnet.alfred-firefox-bookmarks</string>
 	<key>connections</key>
 	<dict>
+		<key>4BF0E202-5678-9012-4567-890123456789</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>29D0E1F2-0314-5678-2345-789012345678</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>07B8C9D0-E1F2-3456-0123-567890123456</key>
 		<array>
 			<dict>
@@ -82,6 +95,37 @@
 	<string>Firefox Bookmarks</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>hotstring</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedbundleid</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>4BF0E202-5678-9012-4567-890123456789</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -312,6 +356,7 @@ variables={allvars}</string>
 Usage
 -----
 
+- Hotkey — open bookmark search instantly (set your shortcut in the workflow editor)
 - `bm [query]` — Show bookmarks filtered by query
   + `↩` — Open in app_default
   + `⌘+↩` — Open in app_cmd
@@ -340,6 +385,40 @@ Use "Browser" as the app name to open in the system default browser.
 Any app_* value may be a list to open in multiple apps simultaneously.</string>
 	<key>uidata</key>
 	<dict>
+		<key>4BF0E202-5678-9012-4567-890123456789</key>
+		<dict>
+			<key>note</key>
+			<string>Hotkey — set your shortcut in Alfred</string>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
+		<key>29D0E1F2-0314-5678-2345-789012345678</key>
+		<dict>
+			<key>note</key>
+			<string>Search / filter bookmarks</string>
+			<key>xpos</key>
+			<integer>220</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
+		<key>E5F6A7B8-C9D0-1234-EF01-345678901234</key>
+		<dict>
+			<key>xpos</key>
+			<integer>430</integer>
+			<key>ypos</key>
+			<integer>60</integer>
+		</dict>
+		<key>F6A7B8C9-D0E1-2345-F012-456789012345</key>
+		<dict>
+			<key>note</key>
+			<string>Open bookmark URL in configured app</string>
+			<key>xpos</key>
+			<integer>610</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
 		<key>07B8C9D0-E1F2-3456-0123-567890123456</key>
 		<dict>
 			<key>note</key>
@@ -355,15 +434,6 @@ Any app_* value may be a list to open in multiple apps simultaneously.</string>
 			<integer>300</integer>
 			<key>ypos</key>
 			<integer>200</integer>
-		</dict>
-		<key>29D0E1F2-0314-5678-2345-789012345678</key>
-		<dict>
-			<key>note</key>
-			<string>Search / filter bookmarks</string>
-			<key>xpos</key>
-			<integer>40</integer>
-			<key>ypos</key>
-			<integer>30</integer>
 		</dict>
 		<key>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</key>
 		<dict>
@@ -396,22 +466,6 @@ Any app_* value may be a list to open in multiple apps simultaneously.</string>
 			<integer>300</integer>
 			<key>ypos</key>
 			<integer>540</integer>
-		</dict>
-		<key>E5F6A7B8-C9D0-1234-EF01-345678901234</key>
-		<dict>
-			<key>xpos</key>
-			<integer>210</integer>
-			<key>ypos</key>
-			<integer>60</integer>
-		</dict>
-		<key>F6A7B8C9-D0E1-2345-F012-456789012345</key>
-		<dict>
-			<key>note</key>
-			<string>Open bookmark URL in configured app</string>
-			<key>xpos</key>
-			<integer>380</integer>
-			<key>ypos</key>
-			<integer>30</integer>
 		</dict>
 	</dict>
 	<key>variables</key>
