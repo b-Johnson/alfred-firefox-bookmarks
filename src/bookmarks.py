@@ -262,15 +262,31 @@ def do_search(bookmarks, opts):
     bookmarks = apply_folder_filters(bookmarks)
 
     if opts.query:
-        bookmarks = wf.filter(
+        # Match on title + folder only. URLs are excluded from the fuzzy key
+        # because long percent-encoded URLs dilute the score below the threshold
+        # even when the title is an exact match.
+        fuzzy_matched = wf.filter(
             opts.query,
             bookmarks,
-            key=lambda b: u'{} {} {}'.format(
-                b.get('title', ''), b.get('url', ''), b.get('folder', '')
+            key=lambda b: u'{} {}'.format(
+                b.get('title') or '', b.get('folder') or ''
             ),
             min_score=20,
         )
-        log.info(u'%d bookmark(s) match "%s"', len(bookmarks), opts.query)
+
+        # Also catch bookmarks whose URL contains the query as a literal
+        # substring (e.g. searching by domain or path segment).
+        matched_urls = {b['url'] for b in fuzzy_matched}
+        q_lower = opts.query.lower()
+        url_matched = [
+            b for b in bookmarks
+            if b['url'] not in matched_urls
+            and q_lower in (b.get('url') or '').lower()
+        ]
+
+        bookmarks = fuzzy_matched + url_matched
+        log.info(u'%d bookmark(s) match "%s" (%d fuzzy, %d url)',
+                 len(bookmarks), opts.query, len(fuzzy_matched), len(url_matched))
 
     if not bookmarks:
         wf.add_item('No matching bookmarks found', icon=ICON_WARNING)
