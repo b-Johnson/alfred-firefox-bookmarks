@@ -6,6 +6,32 @@
 	<string>net.xnet.alfred-firefox-bookmarks</string>
 	<key>connections</key>
 	<dict>
+		<key>07B8C9D0-E1F2-3456-0123-567890123456</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>18C9D0E1-F203-4567-1234-678901234567</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>29D0E1F2-0314-5678-2345-789012345678</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E5F6A7B8-C9D0-1234-EF01-345678901234</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</key>
 		<array>
 			<dict>
@@ -37,32 +63,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>F6A7B8C9-D0E1-2345-F012-456789012345</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>07B8C9D0-E1F2-3456-0123-567890123456</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>18C9D0E1-F203-4567-1234-678901234567</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>29D0E1F2-0314-5678-2345-789012345678</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E5F6A7B8-C9D0-1234-EF01-345678901234</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -340,31 +340,6 @@ Use "Browser" as the app name to open in the system default browser.
 Any app_* value may be a list to open in multiple apps simultaneously.</string>
 	<key>uidata</key>
 	<dict>
-		<key>29D0E1F2-0314-5678-2345-789012345678</key>
-		<dict>
-			<key>note</key>
-			<string>Search / filter bookmarks</string>
-			<key>xpos</key>
-			<integer>40</integer>
-			<key>ypos</key>
-			<integer>30</integer>
-		</dict>
-		<key>E5F6A7B8-C9D0-1234-EF01-345678901234</key>
-		<dict>
-			<key>xpos</key>
-			<integer>210</integer>
-			<key>ypos</key>
-			<integer>60</integer>
-		</dict>
-		<key>F6A7B8C9-D0E1-2345-F012-456789012345</key>
-		<dict>
-			<key>note</key>
-			<string>Open bookmark URL in configured app</string>
-			<key>xpos</key>
-			<integer>380</integer>
-			<key>ypos</key>
-			<integer>30</integer>
-		</dict>
 		<key>07B8C9D0-E1F2-3456-0123-567890123456</key>
 		<dict>
 			<key>note</key>
@@ -380,6 +355,15 @@ Any app_* value may be a list to open in multiple apps simultaneously.</string>
 			<integer>300</integer>
 			<key>ypos</key>
 			<integer>200</integer>
+		</dict>
+		<key>29D0E1F2-0314-5678-2345-789012345678</key>
+		<dict>
+			<key>note</key>
+			<string>Search / filter bookmarks</string>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>30</integer>
 		</dict>
 		<key>A1B2C3D4-E5F6-7890-ABCD-EF1234567890</key>
 		<dict>
@@ -413,6 +397,22 @@ Any app_* value may be a list to open in multiple apps simultaneously.</string>
 			<key>ypos</key>
 			<integer>540</integer>
 		</dict>
+		<key>E5F6A7B8-C9D0-1234-EF01-345678901234</key>
+		<dict>
+			<key>xpos</key>
+			<integer>210</integer>
+			<key>ypos</key>
+			<integer>60</integer>
+		</dict>
+		<key>F6A7B8C9-D0E1-2345-F012-456789012345</key>
+		<dict>
+			<key>note</key>
+			<string>Open bookmark URL in configured app</string>
+			<key>xpos</key>
+			<integer>380</integer>
+			<key>ypos</key>
+			<integer>30</integer>
+		</dict>
 	</dict>
 	<key>variables</key>
 	<dict>
@@ -420,7 +420,7 @@ Any app_* value may be a list to open in multiple apps simultaneously.</string>
 		<string>60</string>
 	</dict>
 	<key>version</key>
-	<string>1.0.0</string>
+	<string>1.1.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/b-Johnson/alfred-firefox-bookmarks</string>
 </dict>
