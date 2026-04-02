@@ -70,8 +70,10 @@ def find_firefox_profile(profile_path=None):
 def read_bookmarks(profile_dir):
     """Read all bookmarks from the Firefox profile, returning a list of dicts.
 
-    Firefox locks ``places.sqlite`` while running, so the file is copied to a
-    temporary location before querying.
+    Firefox locks ``places.sqlite`` while running and uses SQLite WAL mode,
+    meaning recent changes live in ``places.sqlite-wal`` until checkpointed.
+    All three SQLite files are copied into a temp directory so WAL data is
+    applied correctly when the database is opened.
 
     Args:
         profile_dir (str): Absolute path to the Firefox profile directory.
@@ -81,17 +83,20 @@ def read_bookmarks(profile_dir):
     """
     src_db = os.path.join(profile_dir, 'places.sqlite')
 
-    with tempfile.NamedTemporaryFile(suffix='.sqlite', delete=False) as tmp:
-        tmp_path = tmp.name
-
+    tmp_dir = tempfile.mkdtemp()
     try:
-        shutil.copy2(src_db, tmp_path)
-        bookmarks = _query_bookmarks(tmp_path)
+        tmp_db = os.path.join(tmp_dir, 'places.sqlite')
+        shutil.copy2(src_db, tmp_db)
+
+        for ext in ('-wal', '-shm'):
+            src_extra = src_db + ext
+            if os.path.exists(src_extra):
+                shutil.copy2(src_extra, tmp_db + ext)
+                log.debug('Copied %s', os.path.basename(src_extra))
+
+        bookmarks = _query_bookmarks(tmp_db)
     finally:
-        try:
-            os.unlink(tmp_path)
-        except OSError:
-            pass
+        shutil.rmtree(tmp_dir, ignore_errors=True)
 
     return bookmarks
 
@@ -100,7 +105,7 @@ def _query_bookmarks(db_path):
     """Execute the SQLite query and return structured bookmark records.
 
     Args:
-        db_path (str): Path to the (copied) places.sqlite file.
+        db_path (str): Path to the copied places.sqlite file.
 
     Returns:
         list[dict]: Bookmark records with ``title``, ``url``, ``folder``.
@@ -124,8 +129,7 @@ def _query_bookmarks(db_path):
         WHERE type = 2
     """
 
-    conn = sqlite3.connect('file:{}?mode=ro&immutable=1'.format(db_path),
-                           uri=True)
+    conn = sqlite3.connect('file:{}?mode=ro'.format(db_path), uri=True)
     conn.row_factory = sqlite3.Row
 
     try:
