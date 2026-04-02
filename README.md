@@ -28,7 +28,11 @@ Run `bmsettings` to open `settings.json`. The available options are:
   "app_alt": null,
   "app_ctrl": null,
   "app_shift": null,
-  "app_fn": null
+  "app_fn": null,
+  "folder_filters": {
+    "include": [],
+    "exclude": []
+  }
 }
 ```
 
@@ -41,10 +45,58 @@ Run `bmsettings` to open `settings.json`. The available options are:
 | `app_ctrl` | App opened with ^+↩ |
 | `app_shift` | App opened with ⇧+↩ |
 | `app_fn` | App opened with fn+↩ |
+| `folder_filters` | Restrict which bookmarks appear by folder. See below. |
 
 Any `app_*` value can also be a list to open in multiple apps simultaneously:
 ```json
 "app_cmd": ["Firefox", "Safari"]
+```
+
+### Folder Filters
+
+Use `folder_filters` in `settings.json` to control which bookmark folders are shown. Changes take effect immediately on the next search — no `bmupdate` needed.
+
+```json
+"folder_filters": {
+  "include": ["Work", "Dev > Python"],
+  "exclude": ["Social", "Shopping"]
+}
+```
+
+| Key | Behaviour |
+|-----|-----------|
+| `include` | If non-empty, **only** bookmarks in these folders (or their sub-folders) are shown. An empty list means show all. |
+| `exclude` | Bookmarks in these folders (or their sub-folders) are always hidden. Takes precedence over `include`. |
+
+**Matching rules:**
+- Matching is **case-insensitive**
+- Matching is **prefix-based** on the folder breadcrumb path: the pattern `"Dev"` matches `"Dev"`, `"Dev > Python"`, and `"Dev > JS > React"`, but not `"Developer"`
+- Bookmarks with no folder are included only when `include` is empty
+
+**Examples:**
+
+Show only work-related bookmarks:
+```json
+"folder_filters": {
+  "include": ["Work", "ADSK"],
+  "exclude": []
+}
+```
+
+Show everything except social and shopping folders:
+```json
+"folder_filters": {
+  "include": [],
+  "exclude": ["Social", "Shopping", "News"]
+}
+```
+
+Include all of `Dev` but skip a noisy sub-folder:
+```json
+"folder_filters": {
+  "include": ["Dev"],
+  "exclude": ["Dev > Archive"]
+}
 ```
 
 ### Multi-Key Modifier Combinations

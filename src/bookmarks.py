@@ -45,6 +45,10 @@ DEFAULT_SETTINGS = {
     'app_ctrl': None,
     'app_shift': None,
     'app_fn': None,
+    'folder_filters': {
+        'include': [],
+        'exclude': [],
+    },
 }
 
 # Will be populated later
@@ -94,6 +98,69 @@ def get_apps():
         apps['default'] = 'Firefox'
 
     return apps
+
+
+def _folder_matches(folder_path, patterns):
+    """Return ``True`` if ``folder_path`` equals or is a sub-path of any pattern.
+
+    Matching is case-insensitive. The pattern ``"Dev"`` matches ``"Dev"``,
+    ``"Dev > Python"``, and ``"Dev > JS > React"`` but not ``"Developer"``.
+
+    Args:
+        folder_path (str): The bookmark's folder breadcrumb (e.g. ``"Dev > Python"``).
+        patterns (list[str]): Lower-cased patterns to test against.
+
+    Returns:
+        bool: ``True`` if any pattern matches.
+    """
+    f = folder_path.lower()
+    for pattern in patterns:
+        if f == pattern or f.startswith(pattern + ' >'):
+            return True
+    return False
+
+
+def apply_folder_filters(bookmarks):
+    """Apply include/exclude folder filters from ``settings.json``.
+
+    Rules:
+    - If ``include`` is non-empty, only bookmarks whose folder path matches
+      one of the include patterns (or a sub-folder of it) are shown.
+    - If ``exclude`` is non-empty, bookmarks in matching folders are hidden.
+    - ``exclude`` takes precedence over ``include``.
+    - Bookmarks with no folder are shown only when no ``include`` filters are set.
+    - Filtering is case-insensitive prefix matching on the breadcrumb path.
+
+    Args:
+        bookmarks (list[dict]): Full cached bookmark list.
+
+    Returns:
+        list[dict]: Filtered bookmark list.
+    """
+    filters = wf.settings.get('folder_filters') or {}
+    include = [p.lower().strip() for p in (filters.get('include') or []) if p]
+    exclude = [p.lower().strip() for p in (filters.get('exclude') or []) if p]
+
+    if not include and not exclude:
+        return bookmarks
+
+    result = []
+    for bm in bookmarks:
+        folder = (bm.get('folder') or '').strip()
+
+        if exclude and _folder_matches(folder, exclude):
+            continue
+
+        if include and not _folder_matches(folder, include):
+            continue
+
+        result.append(bm)
+
+    log.debug(
+        'folder_filters: %d/%d bookmarks after include=%r exclude=%r',
+        len(result), len(bookmarks), include, exclude,
+    )
+    return result
 
 
 def get_bookmarks(opts):
@@ -191,6 +258,8 @@ def do_search(bookmarks, opts):
         else:
             subtitles[key] = u'Open in {}'.format(join_english(app))
             valid[key] = True
+
+    bookmarks = apply_folder_filters(bookmarks)
 
     if opts.query:
         bookmarks = wf.filter(

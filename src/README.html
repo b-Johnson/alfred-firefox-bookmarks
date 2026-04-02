@@ -246,7 +246,11 @@
   "app_alt": null,
   "app_ctrl": null,
   "app_shift": null,
-  "app_fn": null
+  "app_fn": null,
+  "folder_filters": {
+    "include": [],
+    "exclude": []
+  }
 }</pre>
 
 <table>
@@ -274,10 +278,70 @@
     <td><code>app_cmd</code> … <code>app_fn</code></td>
     <td>Apps for modifier keys. Same values as <code>app_default</code>.</td>
   </tr>
+  <tr>
+    <td><code>folder_filters</code></td>
+    <td>Restrict which bookmark folders are visible. See below.</td>
+  </tr>
 </table>
 
 <p>Any <code>app_*</code> value can be a JSON array to open in multiple apps at once:</p>
 <pre>"app_cmd": ["Firefox", "Safari"]</pre>
+
+<h2>Folder Filters</h2>
+<p>
+  Use <code>folder_filters</code> in <code>settings.json</code> to control which
+  bookmark folders appear in results. Changes take effect on the next search —
+  no <code>bmupdate</code> required.
+</p>
+
+<pre>"folder_filters": {
+  "include": ["Work", "Dev &gt; Python"],
+  "exclude": ["Social", "Shopping"]
+}</pre>
+
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Behaviour</th>
+  </tr>
+  <tr>
+    <td><code>include</code></td>
+    <td>
+      If non-empty, <strong>only</strong> bookmarks in these folders (or their
+      sub-folders) are shown. An empty list means show all folders.
+    </td>
+  </tr>
+  <tr>
+    <td><code>exclude</code></td>
+    <td>
+      Bookmarks in these folders (or their sub-folders) are always hidden.
+      Takes precedence over <code>include</code>.
+    </td>
+  </tr>
+</table>
+
+<p><strong>Matching rules:</strong></p>
+<ul>
+  <li>Matching is <strong>case-insensitive</strong></li>
+  <li>
+    Matching is <strong>prefix-based</strong> on the folder breadcrumb:
+    the pattern <code>"Dev"</code> matches <code>"Dev"</code>,
+    <code>"Dev &gt; Python"</code>, and <code>"Dev &gt; JS &gt; React"</code>,
+    but not <code>"Developer"</code>
+  </li>
+  <li>Bookmarks with no folder are included only when <code>include</code> is empty</li>
+</ul>
+
+<p><strong>Examples:</strong></p>
+
+<p>Show only work-related bookmarks:</p>
+<pre>"folder_filters": { "include": ["Work", "ADSK"], "exclude": [] }</pre>
+
+<p>Show everything except social and shopping:</p>
+<pre>"folder_filters": { "include": [], "exclude": ["Social", "Shopping", "News"] }</pre>
+
+<p>Include all of Dev but skip a noisy sub-folder:</p>
+<pre>"folder_filters": { "include": ["Dev"], "exclude": ["Dev &gt; Archive"] }</pre>
 
 <h2>How Bookmarks are Loaded</h2>
 <p>
